@@ -1,0 +1,81 @@
+%% Dimension line for LaTeX/TikZ
+%% Copyright © 2013 Sébastien Gross  <seb•ɑƬ•chezwam•ɖɵʈ•org>
+%%
+%% This file may be distributed and/or modified
+%%
+%% 1. under the LaTeX Project Public License and/or
+%% 2. under the WTF Public License.
+%%
+%%
+%% This defines Tango scheme colors for LaTeX (see
+%% http://tango.freedesktop.org).
+%%
+%% Please note that commands have been defined using letters instead of
+%% numbers (ei. "Butter 1" -> butterA)
+%%
+%% You can use colors:
+%%
+%%  - directly:                      Colored \textcolor{butterA}{text} here.
+%%  - by color name:                 Colored \butterA{text} here.
+%%  - by color backgroung name:      Colored \BbutterA{text} here.
+%%  - by beamer overlay:             Colored \butterA<2-3>{text} here.
+%%  - by beamer background overlay:  Colored \BbutterA<2-3>{text} here.
+%%  - by HTML code:                  Colored \textcolor{HTML}{\butter}{text} here.
+%%
+%% To install it copy the tango directory to either:
+%%   - $TEXHOME/tex/latex/
+%%   - ~/texmf/tex/latex/
+%%   - ~/Library/texmf/tex/latex
+%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tikz-dimline}[2013/03/13 v1.0 initial version]
+
+\RequirePackage{tikz}
+\RequirePackage{keyval}
+
+\usetikzlibrary{calc}
+
+\makeatletter
+\define@key{dimline}{dimcolor}{\def\dimlinecolor{#1}}
+\define@key{dimline}{start line}{\xdef\dim@line@start@line{#1}}
+\define@key{dimline}{start line width}{\xdef\dim@line@start@line@width{#1}}
+\define@key{dimline}{end line}{\xdef\dim@line@end@line{#1}}
+\define@key{dimline}{end line width}{\xdef\dim@line@end@line@width{#1}}
+\define@key{dimline}{label pos}{\xdef\dim@label@pos{#1}}
+\presetkeys{dimline}{%
+  dimcolor={black},
+  start line={0.5cm},
+  start line width={0.01},
+  end line={0.5cm},
+  end line width={0.01},
+  label pos={midway},
+}{}
+
+% #1: optional keys parameters
+% #2: start point
+% #3: end point
+% #4: text
+\newcommand{\dimline}[4][]{%
+  \setkeys{dimline}{#1}%
+  \begin{scope}[color=\dimlinecolor, inner sep=2pt]
+
+  \node (a) at (axis cs: #2) {};
+  \node (b) at (axis cs: #3) {};
+    
+  \draw [line width=\dim@line@start@line@width, color=\dimlinecolor!40]
+  (a.center) -- ($(a)!\dim@line@start@line!-90:(b)$);
+  \draw [line width=\dim@line@end@line@width, color=\dimlinecolor!40]
+  (b.center) -- ($(b)!\dim@line@end@line!90:(a)$);
+    
+  \draw[|<->|] (a.center) -- (b.center)
+  node[fill=white, \dim@label@pos, sloped] {\tiny{#4}};
+\end{scope}
+}
+\@ifclassloaded{beamer}{%
+  \renewcommand<>{\dimline}[4][]{\alt#5{\beameroriginal{\dimline}[#1]{#2}{#3}{#4}}[#1]{#2}{#3}{#4}}
+}
+\makeatother
+\endinput
+%% tikz-dimline.sty ends here.
+
