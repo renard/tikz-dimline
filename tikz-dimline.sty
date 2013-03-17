@@ -75,15 +75,19 @@
       dimline/.is family,
       dimline,
       color/.initial = black,
-      start line/.initial=1cm,
-      end line/.initial=1cm,
+      recall start length/.initial=1cm,
+      recall end length/.initial=1cm,
+      recall start angle/.initial=-90,
+      recall end angle/.initial=90,
       label style/.initial = {},
       recall style/.initial = {},
       recall start style/.initial = {},
       recall end style/.initial = {},
       #1,
-      start line/.get=\dimline@start@line,
-      end line/.get=\dimline@end@line,
+      recall start length/.get=\dimline@recall@start@length,
+      recall end length/.get=\dimline@recall@end@length,
+      recall start angle/.get=\dimline@recall@start@angle,
+      recall end angle/.get=\dimline@recall@end@angle,
       label style/.get = \dimline@label@style,
       recall style/.get = \dimline@recall@style,
       recall start style/.get = \dimline@recall@start@style,
@@ -113,8 +117,8 @@
     },
     ]
 
-    \coordinate (a to b) at ($(a)!\dimline@start@line!-90:(b)$);
-    \coordinate (b to a) at ($(b)!\dimline@end@line!90:(a)$);
+    \coordinate (a to b) at ($(a)!\dimline@recall@start@length!\dimline@recall@start@angle:(b)$);
+    \coordinate (b to a) at ($(b)!\dimline@recall@end@length!\dimline@recall@end@angle:(a)$);
 
     \draw [recall start] (a.center) -- (a to b);
     \draw [recall end] (b.center) -- (b to a);
