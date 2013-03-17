@@ -74,7 +74,7 @@
       %/dimline/.cd,
       dimline/.is family,
       dimline,
-      dimcolor/.initial = black,
+      color/.initial = black,
       start line/.initial=1cm,
       start line width/.initial=0.01,
       end line/.initial=1cm,
@@ -90,8 +90,8 @@
 
 
   \begin{scope}[
-    dimrecall/.style={\pgfkeysvalueof{/dimline/dimcolor}!40},
-    dimline/.style={\pgfkeysvalueof{/dimline/dimcolor}},
+    dimrecall/.style={\pgfkeysvalueof{/dimline/color}!40},
+    dimline/.style={\pgfkeysvalueof{/dimline/color}},
     ]
 
     \coordinate (a to b) at ($(a)!\dimline@start@line!-90:(b)$);
