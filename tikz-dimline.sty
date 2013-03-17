@@ -34,7 +34,7 @@
 \RequirePackage{tikz}
 \RequirePackage{ifthen}
 
-\usetikzlibrary{calc,decorations.markings}
+\usetikzlibrary{calc,decorations.markings,arrows}
 
 \makeatletter
 
@@ -46,6 +46,56 @@
   execute macro/.style = {/dimline/execute style/.expand once=#1},
 }
 
+
+\pgfarrowsdeclare{dimline}{dimline}
+{
+  \arrowsize=0.2\pgflinewidth
+  \advance\arrowsize by .5\pgflinewidth
+  \pgfarrowsleftextend{-4\arrowsize-.5\pgflinewidth}
+  \pgfarrowsrightextend{6\pgflinewidth}
+} {
+  \arrowsize=0.2\pgflinewidth
+  \advance\arrowsize by .5\pgflinewidth
+  \pgfsetdash{}{0pt} %  do not dash
+  % >
+  % 2.885 by experience
+  % Need a way to compute it exactely
+  \pgfpathmoveto{\pgfpoint{2.885\pgflinewidth}{0pt}}
+  \pgfpathlineto{\pgfpoint{-0\arrowsize}{1\arrowsize}}
+  \pgfpathlineto{\pgfpoint{-0\arrowsize}{-1\arrowsize}}
+  \pgfpathclose
+  \pgfusepathqfillstroke
+  % |
+  \pgfpathmoveto{\pgfpoint{5.5\pgflinewidth}{3\arrowsize}}
+  \pgfpathlineto{\pgfpoint{5.5\pgflinewidth}{-3\arrowsize}}
+  \pgfusepathqstroke
+}
+
+
+
+\pgfarrowsdeclare{dimline reverse}{dimline reverse}
+{
+  \arrowsize=0.2\pgflinewidth
+  \advance\arrowsize by .5\pgflinewidth
+  \pgfarrowsleftextend{-4\arrowsize-.5\pgflinewidth}
+  \pgfarrowsrightextend{0\pgflinewidth}
+} {
+  \arrowsize=0.2\pgflinewidth
+  \advance\arrowsize by .5\pgflinewidth
+  \pgfsetdash{}{0pt} %  do not dash
+  % |
+  \pgfpathmoveto{\pgfpoint{-.5\pgflinewidth}{3\arrowsize}}
+  \pgfpathlineto{\pgfpoint{-.5\pgflinewidth}{-3\arrowsize}}
+  \pgfusepathqstroke
+  % >
+  % 2.885 by experience
+  % Need a way to compute it exactely
+  \pgfpathmoveto{\pgfpoint{2.115\pgflinewidth}{0pt}}
+  \pgfpathlineto{\pgfpoint{5\pgflinewidth}{1\arrowsize}}
+  \pgfpathlineto{\pgfpoint{5\pgflinewidth}{-1\arrowsize}}
+  \pgfpathclose
+  \pgfusepathqfillstroke
+}
 
 
 \newcommand{\dimline@do@nothing}[1]{#1}%
@@ -93,7 +143,8 @@
 
   \begin{scope} [
     line/.style = {
-      color=\pgfkeysvalueof{/dimline/color},|<->|,
+      color=\pgfkeysvalueof{/dimline/color},arrows=dimline-dimline,
+      /dimline/execute macro = \dimline@line@style,
     },
     recall/.style = {
       color=\pgfkeysvalueof{/dimline/color}!40, line width=0.01,
