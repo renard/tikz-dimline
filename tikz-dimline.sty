@@ -76,18 +76,14 @@
       dimline,
       color/.initial = black,
       start line/.initial=1cm,
-      start line width/.initial=0.01,
       end line/.initial=1cm,
-      end line width/.initial=0.01,
       label style/.initial = {},
       recall style/.initial = {},
       recall start style/.initial = {},
       recall end style/.initial = {},
       #1,
-      start line width/.get=\dimline@start@line@width,
       start line/.get=\dimline@start@line,
       end line/.get=\dimline@end@line,
-      end line width/.get=\dimline@end@line@width,
       label style/.get = \dimline@label@style,
       recall style/.get = \dimline@recall@style,
       recall start style/.get = \dimline@recall@start@style,
@@ -95,25 +91,35 @@
     }
 
 
-  \begin{scope}
+  \begin{scope} [
+    line/.style = {
+      color=\pgfkeysvalueof{/dimline/color},|<->|,
+    },
+    recall/.style = {
+      color=\pgfkeysvalueof{/dimline/color}!40, line width=0.01,
+      /dimline/execute macro = \dimline@recall@style,
+    },
+    recall start/.style = {
+      recall,
+      /dimline/execute macro = \dimline@recall@start@style
+    },
+    recall end/.style = {
+      recall,
+      /dimline/execute macro = \dimline@recall@end@style,
+    },
+    label/.style = {
+      fill=white, align=center, sloped=true, pos=0.5,
+      /dimline/execute macro = \dimline@label@style
+    },
+    ]
 
     \coordinate (a to b) at ($(a)!\dimline@start@line!-90:(b)$);
     \coordinate (b to a) at ($(b)!\dimline@end@line!90:(a)$);
 
-    \draw [color=\pgfkeysvalueof{/dimline/color}!40, line width=0.01,
-    /dimline/execute macro = \dimline@recall@style,
-    /dimline/execute macro = \dimline@recall@start@style,]
-    (a.center) -- (a to b);
+    \draw [recall start] (a.center) -- (a to b);
+    \draw [recall end] (b.center) -- (b to a);
 
-    \draw [color=\pgfkeysvalueof{/dimline/color}!40, line width=0.01,
-    /dimline/execute macro = \dimline@recall@style,
-    /dimline/execute macro = \dimline@recall@end@style,]
-    (b.center) -- (b to a);
-
-    \draw[color=\pgfkeysvalueof{/dimline/color},|<->|]
-    (a.center) -- (b.center)
-    node[fill=white, align=center, sloped=true, pos=0.5,
-    /dimline/execute macro = \dimline@label@style] {#4};
+    \draw[line] (a.center) -- (b.center) node[label] {#4};
   \end{scope}
  }
 }
