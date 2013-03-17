@@ -125,19 +125,21 @@
       dimline/.is family,
       dimline,
       color/.initial = black,
-      recall start length/.initial=1cm,
-      recall end length/.initial=1cm,
-      recall start angle/.initial=-90,
-      recall end angle/.initial=90,
+      extension start length/.initial=1cm,
+      extension end length/.initial=1cm,
+      extension start angle/.initial=-90,
+      extension end angle/.initial=90,
+      line style/.initial = {},
       label style/.initial = {},
-      recall style/.initial = {},
-      recall start style/.initial = {},
-      recall end style/.initial = {},
+      extension style/.initial = {},
+      extension start style/.initial = {},
+      extension end style/.initial = {},
       #1,
+      line style/.get = \dimline@line@style,
       label style/.get = \dimline@label@style,
-      recall style/.get = \dimline@recall@style,
-      recall start style/.get = \dimline@recall@start@style,
-      recall end style/.get = \dimline@recall@end@style,
+      extension style/.get = \dimline@extension@style,
+      extension start style/.get = \dimline@extension@start@style,
+      extension end style/.get = \dimline@extension@end@style,
     }
 
 
@@ -146,17 +148,17 @@
       color=\pgfkeysvalueof{/dimline/color},arrows=dimline-dimline,
       /dimline/execute macro = \dimline@line@style,
     },
-    recall/.style = {
+    extension/.style = {
       color=\pgfkeysvalueof{/dimline/color}!40, line width=0.01,
-      /dimline/execute macro = \dimline@recall@style,
+      /dimline/execute macro = \dimline@extension@style,
     },
-    recall start/.style = {
-      recall,
-      /dimline/execute macro = \dimline@recall@start@style
+    extension start/.style = {
+      extension,
+      /dimline/execute macro = \dimline@extension@start@style
     },
-    recall end/.style = {
-      recall,
-      /dimline/execute macro = \dimline@recall@end@style,
+    extension end/.style = {
+      extension,
+      /dimline/execute macro = \dimline@extension@end@style,
     },
     label/.style = {
       fill=white, align=center, sloped=true, pos=0.5,
@@ -164,11 +166,11 @@
     },
     ]
 
-    \coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/recall start length}!\pgfkeysvalueof{/dimline/recall start angle}:(b)$);
-    \coordinate (b to a) at ($(b)!\pgfkeysvalueof{/dimline/recall end length}!\pgfkeysvalueof{/dimline/recall end angle}:(a)$);
+    \coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/extension start length}!\pgfkeysvalueof{/dimline/extension start angle}:(b)$);
+    \coordinate (b to a) at ($(b)!\pgfkeysvalueof{/dimline/extension end length}!\pgfkeysvalueof{/dimline/extension end angle}:(a)$);
 
-    \draw [recall start] (a.center) -- (a to b);
-    \draw [recall end] (b.center) -- (b to a);
+    \draw [extension start] (a.center) -- (a to b);
+    \draw [extension end] (b.center) -- (b to a);
 
     \draw[line] (a.center) -- (b.center) node[label] {#4};
   \end{scope}
