@@ -79,13 +79,13 @@
       start line width/.initial=0.01,
       end line/.initial=1cm,
       end line width/.initial=0.01,
-      label extra/.initial = {},
+      label style/.initial = {},
       #1,
       start line width/.get=\dimline@start@line@width,
       start line/.get=\dimline@start@line,
       end line/.get=\dimline@end@line,
       end line width/.get=\dimline@end@line@width,
-      label extra/.get = \dimline@label@extra,
+      label style/.get = \dimline@label@style,
     }
 
 
@@ -104,8 +104,7 @@
 
     \draw[|<->|, dimline] (a.center) -- (b.center)
     node[fill=white, align=center, sloped=true, pos=0.5,
-    /dimline/execute macro = \dimline@label@extra
-    ] {#4};
+    /dimline/execute macro = \dimline@label@style] {#4};
   \end{scope}
  }
 }
