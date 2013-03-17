@@ -79,18 +79,12 @@
       start line width/.initial=0.01,
       end line/.initial=1cm,
       end line width/.initial=0.01,
-      label anchor/.initial={},
-      label pos/.initial=midway,
-      label fill color/.initial = white,
       label extra/.initial = {},
       #1,
       start line width/.get=\dimline@start@line@width,
       start line/.get=\dimline@start@line,
       end line/.get=\dimline@end@line,
       end line width/.get=\dimline@end@line@width,
-      label anchor/.get=\dimline@label@anchor,
-      label pos/.get=\dimline@label@pos,
-      label fill color/.get=\dimline@label@fill@color,
       label extra/.get = \dimline@label@extra,
     }
 
@@ -109,8 +103,7 @@
     (b.center) -- (b to a);
 
     \draw[|<->|, dimline] (a.center) -- (b.center)
-    node[fill=\dimline@label@fill@color, align=center, sloped,
-    \dimline@label@pos,
+    node[fill=white, align=center, sloped=true, pos=0.5,
     /dimline/execute macro = \dimline@label@extra
     ] {#4};
   \end{scope}
