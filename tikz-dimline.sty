@@ -143,38 +143,38 @@
     }
 
 
-  \begin{scope} [
-    line/.style = {
-      color=\pgfkeysvalueof{/dimline/color},arrows=dimline-dimline,
-      /dimline/execute macro = \dimline@line@style,
-    },
-    extension/.style = {
-      color=\pgfkeysvalueof{/dimline/color}!40, line width=0.01,
-      /dimline/execute macro = \dimline@extension@style,
-    },
-    extension start/.style = {
-      extension,
-      /dimline/execute macro = \dimline@extension@start@style
-    },
-    extension end/.style = {
-      extension,
-      /dimline/execute macro = \dimline@extension@end@style,
-    },
-    label/.style = {
-      fill=white, align=center, sloped=true, pos=0.5,
-      /dimline/execute macro = \dimline@label@style
-    },
-    ]
+    \begin{scope} [
+      line/.style = {
+        color=\pgfkeysvalueof{/dimline/color},arrows=dimline-dimline,
+        /dimline/execute macro = \dimline@line@style,
+      },
+      extension/.style = {
+        color=\pgfkeysvalueof{/dimline/color}!40, line width=0.01,
+        /dimline/execute macro = \dimline@extension@style,
+      },
+      extension start/.style = {
+        extension,
+        /dimline/execute macro = \dimline@extension@start@style
+      },
+      extension end/.style = {
+        extension,
+        /dimline/execute macro = \dimline@extension@end@style,
+      },
+      label/.style = {
+        fill=white, align=center, sloped=true, pos=0.5,
+        /dimline/execute macro = \dimline@label@style
+      },
+      ]
 
-    \coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/extension start length}!\pgfkeysvalueof{/dimline/extension start angle}:(b)$);
-    \coordinate (b to a) at ($(b)!\pgfkeysvalueof{/dimline/extension end length}!\pgfkeysvalueof{/dimline/extension end angle}:(a)$);
+      \coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/extension start length}!\pgfkeysvalueof{/dimline/extension start angle}:(b)$);
+      \coordinate (b to a) at ($(b)!\pgfkeysvalueof{/dimline/extension end length}!\pgfkeysvalueof{/dimline/extension end angle}:(a)$);
 
-    \draw [extension start] (a.center) -- (a to b);
-    \draw [extension end] (b.center) -- (b to a);
+      \draw [extension start] (a.center) -- (a to b);
+      \draw [extension end] (b.center) -- (b to a);
 
-    \draw[line] (a.center) -- (b.center) node[label] {#4};
-  \end{scope}
- }
+      \draw[line] (a.center) -- (b.center) node[label] {#4};
+    \end{scope}
+  }
 }
 
 
