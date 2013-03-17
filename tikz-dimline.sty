@@ -84,10 +84,6 @@
       recall start style/.initial = {},
       recall end style/.initial = {},
       #1,
-      recall start length/.get=\dimline@recall@start@length,
-      recall end length/.get=\dimline@recall@end@length,
-      recall start angle/.get=\dimline@recall@start@angle,
-      recall end angle/.get=\dimline@recall@end@angle,
       label style/.get = \dimline@label@style,
       recall style/.get = \dimline@recall@style,
       recall start style/.get = \dimline@recall@start@style,
@@ -117,8 +113,8 @@
     },
     ]
 
-    \coordinate (a to b) at ($(a)!\dimline@recall@start@length!\dimline@recall@start@angle:(b)$);
-    \coordinate (b to a) at ($(b)!\dimline@recall@end@length!\dimline@recall@end@angle:(a)$);
+    \coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/recall start length}!\pgfkeysvalueof{/dimline/recall start angle}:(b)$);
+    \coordinate (b to a) at ($(b)!\pgfkeysvalueof{/dimline/recall end length}!\pgfkeysvalueof{/dimline/recall end angle}:(a)$);
 
     \draw [recall start] (a.center) -- (a to b);
     \draw [recall end] (b.center) -- (b to a);
