@@ -80,12 +80,18 @@
       end line/.initial=1cm,
       end line width/.initial=0.01,
       label style/.initial = {},
+      recall style/.initial = {},
+      recall start style/.initial = {},
+      recall end style/.initial = {},
       #1,
       start line width/.get=\dimline@start@line@width,
       start line/.get=\dimline@start@line,
       end line/.get=\dimline@end@line,
       end line width/.get=\dimline@end@line@width,
       label style/.get = \dimline@label@style,
+      recall style/.get = \dimline@recall@style,
+      recall start style/.get = \dimline@recall@start@style,
+      recall end style/.get = \dimline@recall@end@style,
     }
 
 
@@ -97,9 +103,14 @@
     \coordinate (a to b) at ($(a)!\dimline@start@line!-90:(b)$);
     \coordinate (b to a) at ($(b)!\dimline@end@line!90:(a)$);
 
-    \draw [dimrecall, line width=\dimline@start@line@width]
+    \draw [dimrecall, line width=0.01,
+    /dimline/execute macro = \dimline@recall@style,
+    /dimline/execute macro = \dimline@recall@start@style,]
     (a.center) -- (a to b);
-    \draw [dimrecall, line width=\dimline@end@line@width]
+
+    \draw [dimrecall, line width=0.01,
+    /dimline/execute macro = \dimline@recall@style,
+    /dimline/execute macro = \dimline@recall@end@style,]
     (b.center) -- (b to a);
 
     \draw[|<->|, dimline] (a.center) -- (b.center)
