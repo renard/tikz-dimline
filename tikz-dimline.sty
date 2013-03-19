@@ -136,19 +136,23 @@
       label style/.initial = {},
       extension style/.initial = {},
       extension start style/.initial = {},
+      extension start path/.initial = {},
       extension end style/.initial = {},
+      extension end path/.initial = {},
       #1,
       line style/.get = \dimline@line@style,
       label style/.get = \dimline@label@style,
       extension style/.get = \dimline@extension@style,
       extension start style/.get = \dimline@extension@start@style,
+      extension start path/.get = \dimline@extension@start@path,
       extension end style/.get = \dimline@extension@end@style,
+      extension end path/.get = \dimline@extension@end@path,
     }
-
 
     \begin{scope} [
       line/.style = {
-        color=\pgfkeysvalueof{/dimline/color},arrows=dimline-dimline,
+        color=\pgfkeysvalueof{/dimline/color},
+        arrows=dimline-dimline,
         /dimline/execute macro = \dimline@line@style,
       },
       extension/.style = {
@@ -169,11 +173,19 @@
       },
       ]
 
-      \coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/extension start length}!\pgfkeysvalueof{/dimline/extension start angle}:(b)$);
-      \coordinate (b to a) at ($(b)!\pgfkeysvalueof{/dimline/extension end length}!\pgfkeysvalueof{/dimline/extension end angle}:(a)$);
+      \ifthenelse{\equal{\dimline@extension@start@path}{}}{
+        \coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/extension start length}!\pgfkeysvalueof{/dimline/extension start angle}:(b)$);
+        \draw [extension start] (a.center) -- (a to b);
+      } {
+        \draw [extension start] plot coordinates {\dimline@extension@start@path};
+      }
 
-      \draw [extension start] (a.center) -- (a to b);
-      \draw [extension end] (b.center) -- (b to a);
+      \ifthenelse{\equal{\dimline@extension@end@path}{}}{
+        \coordinate (b to a) at ($(b)!\pgfkeysvalueof{/dimline/extension end length}!\pgfkeysvalueof{/dimline/extension end angle}:(a)$);
+        \draw [extension end] (b.center) -- (b to a);
+      } {
+        \draw [extension end] plot coordinates {\dimline@extension@end@path};
+      }
 
       \draw[line] (a.center) -- (b.center) node[label] {#4};
     \end{scope}
