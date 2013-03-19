@@ -118,7 +118,6 @@
   }{%
     \coordinate (a) at (#2) {};
     \coordinate (b) at (#3) {};
-    %\def\dimline@internal#1{#1}%
     \let\dimline@internal\dimline@do@nothing%
   }%
 
@@ -126,7 +125,6 @@
 
   \dimline@internal{
     \pgfkeys{
-      %/dimline/.cd,
       dimline/.is family,
       dimline,
       color/.initial = black,
