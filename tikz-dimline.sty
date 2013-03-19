@@ -109,16 +109,10 @@
 \newcommand{\dimline}[4][]{%
 
   \pgfplotsifinaxis{%
-    \coordinate (a) at (axis cs: #2) {};
-    \coordinate (b) at (axis cs: #3) {};
     \let\dimline@internal\pgfplotsextra%
   }{%
-    \coordinate (a) at (#2) {};
-    \coordinate (b) at (#3) {};
     \let\dimline@internal\dimline@do@nothing%
   }%
-
-
 
   \dimline@internal{
     \pgfkeys{
@@ -169,6 +163,9 @@
         /dimline/execute macro = \dimline@label@style
       },
       ]
+
+      \coordinate (a) at #2 {};
+      \coordinate (b) at #3 {};
 
       \ifthenelse{\equal{\dimline@extension@start@path}{}}{
         \coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/extension start length}!\pgfkeysvalueof{/dimline/extension start angle}:(b)$);
