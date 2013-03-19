@@ -47,30 +47,32 @@
 }
 
 
+\newdimen\dimline@arrow@linewidth
+
 \pgfarrowsdeclare{dimline}{dimline}
 {
   \arrowsize=0.2\pgflinewidth
   \advance\arrowsize by .5\pgflinewidth
   \pgfarrowsleftextend{-4\arrowsize-.5\pgflinewidth}
-  \pgfarrowsrightextend{6\pgflinewidth}
+  \pgfarrowsrightextend{5\pgflinewidth}
 } {
-  \arrowsize=0.2\pgflinewidth
-  \advance\arrowsize by .5\pgflinewidth
+  \dimline@arrow@linewidth=\pgflinewidth
+  \arrowsize=0.2\dimline@arrow@linewidth
+  \advance\arrowsize by .5\dimline@arrow@linewidth
   \pgfsetdash{}{0pt} %  do not dash
+  % |
+  \pgfsetlinewidth{0.5\dimline@arrow@linewidth}
+  \pgfpathmoveto{\pgfpoint{4.75\dimline@arrow@linewidth}{3\arrowsize}}
+  \pgfpathlineto{\pgfpoint{4.75\dimline@arrow@linewidth}{-3\arrowsize}}
+  \pgfusepathqstroke
   % >
-  % 2.885 by experience
-  % Need a way to compute it exactely
-  \pgfpathmoveto{\pgfpoint{2.885\pgflinewidth}{0pt}}
-  \pgfpathlineto{\pgfpoint{-0\arrowsize}{1\arrowsize}}
-  \pgfpathlineto{\pgfpoint{-0\arrowsize}{-1\arrowsize}}
+  \pgfsetlinewidth{0.01pt}
+  \pgfpathmoveto{\pgfpoint{4.5\dimline@arrow@linewidth}{0pt}}
+  \pgfpathlineto{\pgfpoint{0pt}{2\arrowsize}}
+  \pgfpathlineto{\pgfpoint{0pt}{-2\arrowsize}}
   \pgfpathclose
   \pgfusepathqfillstroke
-  % |
-  \pgfpathmoveto{\pgfpoint{5.5\pgflinewidth}{3\arrowsize}}
-  \pgfpathlineto{\pgfpoint{5.5\pgflinewidth}{-3\arrowsize}}
-  \pgfusepathqstroke
 }
-
 
 
 \pgfarrowsdeclare{dimline reverse}{dimline reverse}
