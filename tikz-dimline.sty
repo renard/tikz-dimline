@@ -74,25 +74,22 @@
 
 \pgfarrowsdeclare{dimline reverse}{dimline reverse}
 {
-  \arrowsize=0.2\pgflinewidth
-  \advance\arrowsize by .5\pgflinewidth
-  \pgfarrowsleftextend{-4\arrowsize-.5\pgflinewidth}
-  \pgfarrowsrightextend{0\pgflinewidth}
+  \arrowsize=1\pgflinewidth
+  \pgfarrowsleftextend{-5\arrowsize}
+  \pgfarrowsrightextend{0\arrowsize}
 } {
-  \dimline@arrow@linewidth=\pgflinewidth
-  \arrowsize=0.2\dimline@arrow@linewidth
-  \advance\arrowsize by .5\dimline@arrow@linewidth
+  \arrowsize=1\pgflinewidth
   \pgfsetdash{}{0pt} %  do not dash
   % |
-  \pgfsetlinewidth{0.5\dimline@arrow@linewidth}
-  \pgfpathmoveto{\pgfpoint{-0.25\dimline@arrow@linewidth}{3\arrowsize}}
-  \pgfpathlineto{\pgfpoint{-0.25\dimline@arrow@linewidth}{-3\arrowsize}}
+  \pgfsetlinewidth{0.5\arrowsize}
+  \pgfpathmoveto{\pgfpoint{-0.25\arrowsize}{3\arrowsize}}
+  \pgfpathlineto{\pgfpoint{-0.25\arrowsize}{-3\arrowsize}}
   \pgfusepathqstroke
   % >
   \pgfsetlinewidth{0.01pt}
   \pgfpathmoveto{\pgfpoint{0pt}{0pt}}
-  \pgfpathlineto{\pgfpoint{4.5\dimline@arrow@linewidth}{2\arrowsize}}
-  \pgfpathlineto{\pgfpoint{4.5\dimline@arrow@linewidth}{-2\arrowsize}}
+  \pgfpathlineto{\pgfpoint{7.5\arrowsize}{2\arrowsize}}
+  \pgfpathlineto{\pgfpoint{7.5\arrowsize}{-2\arrowsize}}
   \pgfpathclose
   \pgfusepathqfillstroke
 }
