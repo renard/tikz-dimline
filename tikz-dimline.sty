@@ -82,19 +82,20 @@
   \pgfarrowsleftextend{-4\arrowsize-.5\pgflinewidth}
   \pgfarrowsrightextend{0\pgflinewidth}
 } {
-  \arrowsize=0.2\pgflinewidth
-  \advance\arrowsize by .5\pgflinewidth
+  \dimline@arrow@linewidth=\pgflinewidth
+  \arrowsize=0.2\dimline@arrow@linewidth
+  \advance\arrowsize by .5\dimline@arrow@linewidth
   \pgfsetdash{}{0pt} %  do not dash
   % |
-  \pgfpathmoveto{\pgfpoint{-.5\pgflinewidth}{3\arrowsize}}
-  \pgfpathlineto{\pgfpoint{-.5\pgflinewidth}{-3\arrowsize}}
+  \pgfsetlinewidth{0.5\dimline@arrow@linewidth}
+  \pgfpathmoveto{\pgfpoint{-0.25\dimline@arrow@linewidth}{3\arrowsize}}
+  \pgfpathlineto{\pgfpoint{-0.25\dimline@arrow@linewidth}{-3\arrowsize}}
   \pgfusepathqstroke
   % >
-  % 2.115 by experience
-  % Need a way to compute it exactely
-  \pgfpathmoveto{\pgfpoint{2.115\pgflinewidth}{0pt}}
-  \pgfpathlineto{\pgfpoint{5\pgflinewidth}{1\arrowsize}}
-  \pgfpathlineto{\pgfpoint{5\pgflinewidth}{-1\arrowsize}}
+  \pgfsetlinewidth{0.01pt}
+  \pgfpathmoveto{\pgfpoint{0pt}{0pt}}
+  \pgfpathlineto{\pgfpoint{4.5\dimline@arrow@linewidth}{2\arrowsize}}
+  \pgfpathlineto{\pgfpoint{4.5\dimline@arrow@linewidth}{-2\arrowsize}}
   \pgfpathclose
   \pgfusepathqfillstroke
 }
