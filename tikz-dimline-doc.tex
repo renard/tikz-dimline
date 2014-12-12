@@ -2,8 +2,8 @@
 \documentclass[a4paper]{article}
 
 \usepackage[all]{nowidow}
-%%\widowpenalty10000
-%%\clubpenalty10000
+\widowpenalty10000
+\clubpenalty10000
 
 
 %% See http://tex.stackexchange.com/questions/78334/print-system-information-in-latex-doc
@@ -59,6 +59,8 @@
 \tcbuselibrary{minted}
 \tcbuselibrary{documentation}
 
+%% Diameter
+\usepackage{ wasysym }
 
 \usepackage{tikz-dimline}
 
@@ -167,25 +169,21 @@
 
 
 
-\title{\texttt{dimline}\\ Technical dimension lines using \PGF/\TikZ}
+\title{
+  \texttt{dimline}\\
+  Technical dimension lines using \PGF/\TikZ\\
+}
 \author{Sébastien Gross\\ \texttt{<seb•$\alpha\tau$•chezwam•$\partial\theta\tau$•org>}}
-\date{\today}
+\date{\csname ver@tikz-dimline.sty\endcsname}
 
 \begin{document}
 
 \maketitle
 
-\begin{tcolorbox}[title={Contents},fonttitle=\bfseries\Large,
-  colback=yellow!10!white,colframe=red!50!black,before=\par\bigskip\noindent]
-\makeatletter
-\@starttoc{toc}
-\makeatother
-%\tableofcontents
-\end{tcolorbox}
 
 \let\thefootnote\relax\footnotetext{This documentation was compiled on
   {\platformname} using {\compilator} {\cversion}, {\PGF} {\pgfversion},
-  \texttt{tcolorbox} {\tcbversion} on \date{\today}.}
+  \texttt{tcolorbox} {\tcbversion} on {\today}.}
 
 
 Dimension lines are drawn segments that indicate the measurement of a
@@ -195,6 +193,50 @@ displayed covers the entire span of that line. The direction of the line
 measurement. Dimension lines are kept outside of the object illustrated,
 typically connected to other lines that display the area where that
 measurement applies. This keeps the illustration clear.
+
+\begin{tcolorbox}[title={Contents},fonttitle=\bfseries\Large,
+  colback=yellow!10!white,colframe=red!50!black,before=\par\bigskip\noindent]
+  \makeatletter
+  \@starttoc{toc}
+  \makeatother
+  %\tableofcontents
+\end{tcolorbox}
+
+
+\newpage
+
+
+
+\section{Overview}
+
+\begin{exampleB}{}
+
+\begin{tikzpicture}[scale=2]
+  \draw[line width=1pt]  (0,0) -- (0,4) -- (.5,4) -- (.5,5) -- (1.,5)
+  -- (1.,4) -- (1.5,4) -- (1.5,0) -- cycle;
+
+  \draw node (A) at (2.5,0) {};
+  
+  \dimline[line style = {line width=0.7},
+    extension start length=-0.24,
+    extension end length=-0.24] {(A)}{($ (A) + (0,4) $)}{$4.0$};
+
+  \dimline[line style = {red, line width=0.7},
+    extension start length=0,
+    extension end length=0] {(0,2)}{(1.5, 2)}{ $\diameter 1.5$};
+
+  \dimline[label style={above=0.5ex,},
+    extension start path = {(0,6) (0,5.7) (0.5,5.4) (0.5,5.05)},
+    extension end path =  {(1.5,6) (1.5,5.7) (1,5.4) (1,5.05)},]
+          {(0,6)}{(1.5,6)}{$\diameter 0.5$};
+\end{tikzpicture}
+\end{exampleB}
+
+
+\let\thefootnote\relax\footnotetext{The \texttt{wasysym} package is required to have \texttt{\textbackslash diameter} command.}
+
+
+\newpage
 
 
 \section{Installation}
