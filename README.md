@@ -10,9 +10,6 @@ typically connected to other lines that display the area where that
 measurement applies. This keeps the illustration clear.
 
 
-[!dimline1.png]()
-[!dimline2.png]()
-[!dimline3.png]()
 
 ## Installation
 
@@ -49,6 +46,22 @@ To install the `tkiz-dimline` package copy its directory to either to:
 ````
 
 See [tikz-dimline-doc.pdf](tikz-dimline-doc.pdf) for further help.
+
+
+## Example
+
+Global dimension line
+
+![Dimension line example 1](dimline1.png)
+
+Normal arrow details
+
+![Dimension line example 2](dimline2.png)
+
+Reversed arrow details
+
+![Dimension line example 3](dimline3.png)
+
 
 
 ## License
