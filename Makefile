@@ -11,8 +11,12 @@ doc:
 	$(XELATEX) tikz-dimline-doc.tex
 
 zip:
-	git archive HEAD --prefix=$(PACKAGE)-$(VERSION)/ --format=zip > $(PACKAGE)-$(VERSION).zip
-
+	# Need to rename README.md to README.
+	git archive HEAD --prefix=$(PACKAGE)-$(VERSION)/ --format=tar | tar -x -
+	mv $(PACKAGE)-$(VERSION)/README.md $(PACKAGE)-$(VERSION)/README
+	rm -f $(PACKAGE)-$(VERSION)/.gitignore
+	zip -r $(PACKAGE)-$(VERSION).zip $(PACKAGE)-$(VERSION)
+	rm -rf $(PACKAGE)-$(VERSION)
 clean:
 	rm -f *.{zip,aux,listing,log,out,pyg,toc}
 
